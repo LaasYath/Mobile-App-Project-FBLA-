@@ -1,1 +1,1 @@
-# Mobile-App-Project-FBLA-
+# Edu-Mobile-App-Project
