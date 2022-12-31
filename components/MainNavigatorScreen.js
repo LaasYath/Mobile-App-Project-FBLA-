@@ -14,7 +14,7 @@ export const MainNavigatorScreen = (props) => {
   // note: do not need to have another <NavigationContainer />
 
   return(
-    <Tab.Navigator>
+    <Tab.Navigator initialRouteName="Home">
       <Tab.Screen name="Gallery" component={GalleryScreen} />
       <Tab.Screen name="Calendar" component={CalendarScreen} />
       <Tab.Screen name="Home" component={HomeScreen} />
