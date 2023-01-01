@@ -1,7 +1,10 @@
+import { useContext } from 'react';
 import { StyleSheet, Text, View, Button } from 'react-native';
 
+import { AuthContext } from '../App.js';
+
 export const HomeScreen = (props) => {
-  const navigation = props.navigation;
+  const { setUser } = useContext(AuthContext);
 
   return(
     <View style={styles.layout}>
@@ -10,9 +13,7 @@ export const HomeScreen = (props) => {
       </Text>
       <Button 
         title="Log Out"
-        onPress={() => {
-          navigation.getParent().navigate('Login');
-        }}
+        onPress={() => setUser(false)}
       />
     </View>
   );
