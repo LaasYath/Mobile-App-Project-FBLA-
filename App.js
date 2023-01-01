@@ -1,13 +1,9 @@
-import React, { useState, createContext, useContext } from 'react';
+import React, { useState } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { Provider as PaperProvider } from 'react-native-paper';
 
+import { AuthContext } from './Contexts.js'
 import { AuthHelper } from './components/AuthHelper.js';
-
-export const AuthContext = createContext({
-  hasUser: false, 
-  setUser: () => {},
-});
 
 export default function App() {
   const [hasUser, setUser] = useState(false);

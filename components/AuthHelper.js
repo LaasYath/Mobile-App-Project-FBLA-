@@ -1,7 +1,6 @@
-import React, { useState, createContext, useContext } from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 
-import { AuthContext } from '../App.js';
+import { AuthContext } from '../Contexts.js';
 import { LoginScreen } from './LoginScreen.js';
 import { MainNavigatorScreen } from './MainNavigatorScreen.js';
 
