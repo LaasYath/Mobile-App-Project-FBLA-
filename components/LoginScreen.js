@@ -2,7 +2,7 @@ import { useContext, useState } from 'react';
 import { StyleSheet, Text, View, Button } from 'react-native';
 import { TextInput } from 'react-native-paper';
 
-import { AuthContext } from '../App.js';
+import { AuthContext } from '../Contexts.js';
 
 export const LoginScreen = (props) => {
   const { setUser } = useContext(AuthContext);

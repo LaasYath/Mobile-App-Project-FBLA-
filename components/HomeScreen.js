@@ -1,7 +1,7 @@
 import { useContext } from 'react';
 import { StyleSheet, Text, View, Button } from 'react-native';
 
-import { AuthContext } from '../App.js';
+import { AuthContext } from '../Contexts.js';
 
 export const HomeScreen = (props) => {
   const { setUser } = useContext(AuthContext);
