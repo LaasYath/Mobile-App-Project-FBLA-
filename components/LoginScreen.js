@@ -8,7 +8,6 @@ import { AuthContext } from '../Contexts.js';
 import Parse from "parse/react-native.js";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-import { AuthUser } from './AuthUser.js';
 //hash funcs
 import { JSHash, JSHmac, CONSTANTS } from "react-native-hash";
 
