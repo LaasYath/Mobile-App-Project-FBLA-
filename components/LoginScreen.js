@@ -8,6 +8,7 @@ import { AuthContext } from '../Contexts.js';
 import Parse from "parse/react-native.js";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
+import { AuthUser } from './AuthUser.js';
 //hash funcs
 import { JSHash, JSHmac, CONSTANTS } from "react-native-hash";
 
@@ -16,45 +17,7 @@ Parse.setAsyncStorage(AsyncStorage);
 Parse.initialize('hd8SQBtMaTjacNWKfJ1rRWnZCAml1Rquec1S9xCV', 'Qn7JG5jASG6A45G5acmsKMCCgJwJx1Kd7Shc6VPq');
 Parse.serverURL = 'https://parseapi.back4app.com/';
 
-//get & print all students psswd hash when app is intially loaded (runs once only)
-  // (async () => {
-  //   const Student = Parse.Object.extend('Student');
-  //   const query = new Parse.Query(Student);
-  //   // You can also query by using a parameter of an object
-  //   // query.equalTo('objectId', 'xKue915KBG');
-  //   try {
-  //     const results = await query.find();
-  //     for (const object of results) {
-  //       // Access the Parse Object attributes using the .GET method
-  //       const passwordHash = object.get('passwordHash')
-  //       console.log(passwordHash);
-  //     }
-  //   } catch (error) {
-  //     console.error('Error while fetching Student', error);
-  //   }
-  // })();
-
-// function AuthUser(props) {
-//   const Student = Parse.Object.extend('Student');
-//     const query = new Parse.Query(Student);
-//     // You can also query by using a parameter of an object
-//     // query.equalTo('objectId', 'xKue915KBG');
-//     try {
-//       const results = query.find();
-//       for (const object of results) {
-//         // Access the Parse Object attributes using the .GET method
-//         const id = object.get('name');
-//         if (id == props.userID) {
-//           const passwordHash = object.get('passwordHash')
-//           if (passwordHash == props.password) {
-//             setUser(true);
-//           }
-//         }
-//       }
-//     } catch (error) {
-//       console.error('Error while fetching Student', error);
-//     }
-// }
+//get & print all students psswd hash when app is intially loaded (runs once only - async)
 
 export const LoginScreen = (props) => {
   const { setUser } = useContext(AuthContext);
@@ -86,7 +49,39 @@ export const LoginScreen = (props) => {
         <Button
           title="Go!"
           onPress={() => {
-            setUser(true)
+            console.log("went inside");
+
+            async function authenticate() {
+              const Student = Parse.Object.extend('Student');
+              const query = new Parse.Query(Student);
+              console.log(query);
+              const results = await query.find();
+              console.log(results);
+
+              try {
+                for (const object of results) {
+                  // Access the Parse Object attributes using the .GET method
+                  const id = object.get('stuID');
+                  console.log("new user");
+                  console.log(id);
+                  if (id == IDText) {
+                    console.log("id checks out");
+                    const passwordHash = object.get('passwordHash')
+                    JSHash(passwordText, CONSTANTS.HashAlgorithms.sha256)
+                      .then(hash => {if (passwordHash == hash) {
+                                      setUser(true);
+                      }})
+                      .catch(e => console.log(e));
+                  }
+                }
+              } catch (error) {
+                console.error('Error while fetching Student', error);
+              }
+            }
+
+            authenticate();
+            
+            
           }}
         />
       </View>
