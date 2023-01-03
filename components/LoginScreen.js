@@ -4,6 +4,58 @@ import { TextInput } from 'react-native-paper';
 
 import { AuthContext } from '../Contexts.js';
 
+//Initialize Parse/Connect to Back4App db
+import Parse from "parse/react-native.js";
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
+//hash funcs
+import { JSHash, JSHmac, CONSTANTS } from "react-native-hash";
+
+//Initialize sdk
+Parse.setAsyncStorage(AsyncStorage);
+Parse.initialize('hd8SQBtMaTjacNWKfJ1rRWnZCAml1Rquec1S9xCV', 'Qn7JG5jASG6A45G5acmsKMCCgJwJx1Kd7Shc6VPq');
+Parse.serverURL = 'https://parseapi.back4app.com/';
+
+//get & print all students psswd hash when app is intially loaded (runs once only)
+  // (async () => {
+  //   const Student = Parse.Object.extend('Student');
+  //   const query = new Parse.Query(Student);
+  //   // You can also query by using a parameter of an object
+  //   // query.equalTo('objectId', 'xKue915KBG');
+  //   try {
+  //     const results = await query.find();
+  //     for (const object of results) {
+  //       // Access the Parse Object attributes using the .GET method
+  //       const passwordHash = object.get('passwordHash')
+  //       console.log(passwordHash);
+  //     }
+  //   } catch (error) {
+  //     console.error('Error while fetching Student', error);
+  //   }
+  // })();
+
+// function AuthUser(props) {
+//   const Student = Parse.Object.extend('Student');
+//     const query = new Parse.Query(Student);
+//     // You can also query by using a parameter of an object
+//     // query.equalTo('objectId', 'xKue915KBG');
+//     try {
+//       const results = query.find();
+//       for (const object of results) {
+//         // Access the Parse Object attributes using the .GET method
+//         const id = object.get('name');
+//         if (id == props.userID) {
+//           const passwordHash = object.get('passwordHash')
+//           if (passwordHash == props.password) {
+//             setUser(true);
+//           }
+//         }
+//       }
+//     } catch (error) {
+//       console.error('Error while fetching Student', error);
+//     }
+// }
+
 export const LoginScreen = (props) => {
   const { setUser } = useContext(AuthContext);
   const [districtText, setDistrictText] = useState("");
@@ -33,7 +85,9 @@ export const LoginScreen = (props) => {
       <View style={styles.button}>
         <Button
           title="Go!"
-          onPress={() => setUser(true)}
+          onPress={() => {
+            setUser(true)
+          }}
         />
       </View>
     </View>

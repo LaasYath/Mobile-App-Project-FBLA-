@@ -1,13 +1,13 @@
 {
   "expo": {
-    "name": "FirstExpoApp",
-    "slug": "FirstExpoApp",
+    "name": "EduApp",
+    "slug": "EduApp",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
     "splash": {
-      "image": "./assets/splash.png",
+      "image": "./assets/eduSplashPage.jpg",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
