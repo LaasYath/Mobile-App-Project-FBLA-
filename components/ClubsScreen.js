@@ -69,6 +69,7 @@ const UserClubCards = (props) => {
   const user = props.user;
   const cardsData = getUserClubCards(user);
 
+  // this code causes a compile error
   // const cards = cardsData.map((step, move) => {
   //   return (
   //     <View key={move}>
@@ -119,36 +120,7 @@ function getUserClubCards(user) {
   //   },
   // ];
 
-  // return cardData;
-
-  async function clubInfo() {
-    console.log(global.id);
-    const query = new Parse.Query('Student');
-    const object = await query.get(global.id);
-    const response = await object.save();
-    const clubList = response.get("clubs");
-
-    const query2 = new Parse.Query("Club");
-
-    let cardData = [];
-
-    clubList.forEach(getClubs);
-    for (let i = 0; i < clubList.length; i++) {
-      
-    }
-    async function getClubs(value, index, array) {
-      const object2 = await query2.get(value);
-      const response2 = await object2.save();
-      let clubData = new Map();
-      clubData.set("clubTitle", response2.get("name"));
-      clubData.set("clubDescription", response2.get("descrip"));
-      clubData.set("clubCover", response2.get("cover"));
-      cardData.push(clubData);
-      console.log(cardData);
-    }
-    return cardData;
-  }
-
+  // returns cardData;
   return clubInfo();
 }
 
@@ -191,6 +163,31 @@ function getAllClubCards() {
     },
   ];
 
+  return cardData;
+}
+
+//must be async for queries to work
+async function clubInfo() {
+  const query = new Parse.Query('Student');
+  const object = await query.get(global.id);
+  const response = await object.save();
+  const clubList = response.get("clubs");
+
+  const query2 = new Parse.Query("Club");
+
+  let cardData = [];
+
+  //creating a map with club data and adding it to cardData array
+  clubList.forEach(getClubs);
+  async function getClubs(value) {
+    const object2 = await query2.get(value); //uses club object id to return relevant properties
+    const response2 = await object2.save();
+    let clubData = new Map();
+    clubData.set("clubTitle", response2.get("name"));
+    clubData.set("clubDescription", response2.get("descrip"));
+    clubData.set("clubCover", response2.get("cover"));
+    cardData.push(clubData);
+  }
   return cardData;
 }
 
