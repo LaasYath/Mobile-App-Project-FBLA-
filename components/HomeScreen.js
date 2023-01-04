@@ -13,7 +13,9 @@ export const HomeScreen = (props) => {
       </Text>
       <Button 
         title="Log Out"
-        onPress={() => setUser(false)}
+        onPress={() => {
+          setUser(false)
+        }}
       />
     </View>
   );
